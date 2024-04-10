@@ -1,0 +1,51 @@
+Notes
+
+
+
+Links
+1. https://medium.com/@lukasz.kurant/using-biometrics-in-react-native-65c7fa9bc5fe
+2. https://www.npmjs.com/package/react-native-biometrics - 2 years
+3. https://www.npmjs.com/package/@marianj97/react-native-biometrics - Fork is made from react-native-biometrics version 3.0.0
+
+Procedure.
+1. User arrives at a page. 
+
+7. Biometric must be part of register
+7a. Detect if biometrics is supported, if so present option to use BM
+8. Last part or register is Login with biometric Y/N. Still add passwords and have button for login with bio
+9. User clicks on bio btn and goes to screen where I guess it will ask whether to use face or fprint
+10. User chooses one and then does wizard: get public key
+11. We use the public key and create a signature with the register data and send it to PHP
+12. PHP gets register data and public key
+13. Store public key with user record
+14. Store user data from register
+
+Login
+1. User goes to BM screen
+2. Does FP scan
+3. Scan is good
+4. Create a payload from timestamp
+5. Create a signature from the payload and add a msg like Confirmation
+6. Send data to php -> {useridentifier: email & pwd, signature: signature, payload: payload}
+7. PHP: use the email & pwd to ge the public key stored in register process
+8. Get payload & signature
+9. PHP: do that openssl to verify the signature
+10. If sig is verified then all good.
+11. Normal process: delete token, create token and return
+
+
+4. Generate some login data (timestamp, "confirmed")
+5. Create a signature
+6. Send to server
+
+
+
+2. Detect biometrics
+3. Prompt user if they would like to use biometrics to login
+4. N = Login screen, remember and forgot. Add button Use biometrics.
+5. Y = bio login screen. Add button use password [Goes to login screen]
+6. Need a database flag to show login preference. 0 - new, 1 - password, 2 - biometrics
+
+
+
+
